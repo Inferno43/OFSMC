@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">OFS MC</string>
     <string name="title_activity_onboarding">Onboarding</string>
+    <string name="Home">Home</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="sign_in">Sign In</string>
     <string name="submit">Submit</string>
     <string name="forgot_password">Forgot Password</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
 

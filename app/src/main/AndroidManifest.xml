@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.Home"></activity>
+        <activity android:name=".home.Home"
+            android:label="@string/Home"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

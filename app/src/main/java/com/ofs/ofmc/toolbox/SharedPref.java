@@ -24,6 +24,7 @@ public class SharedPref {
     public static final String PREFS_OFMC = "OFMC";
     public static final String PREFS_USERNAME = "userName";
     public static final String PREFS_PASSWORD = "password";
+    public static final boolean PREFS_IS_PROFILE_COMPLETE = false;
     public static final String PREFS_AUTOFILL = "autofill";
     public static final String PREFS_NOTIFICATION_INTERVAL = "notificationInterval";
 

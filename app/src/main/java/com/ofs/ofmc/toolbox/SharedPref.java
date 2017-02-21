@@ -24,7 +24,9 @@ public class SharedPref {
     public static final String PREFS_OFMC = "OFMC";
     public static final String PREFS_USERNAME = "userName";
     public static final String PREFS_PASSWORD = "password";
-    public static final boolean PREFS_IS_PROFILE_COMPLETE = false;
+    public static final String PREFS_USERID= "userId";
+
+    public static final String PREFS_IS_PROFILE_COMPLETE = "profile";
     public static final String PREFS_AUTOFILL = "autofill";
     public static final String PREFS_NOTIFICATION_INTERVAL = "notificationInterval";
 
@@ -81,11 +83,11 @@ public class SharedPref {
             editor.putInt(PREFS_NOTIFICATION_INTERVAL, map.get(PREFS_NOTIFICATION_INTERVAL));
         //editor.putString(PREFS_KEY, String.valueOf(map.get("123"))); //3
 
-        editor.commit(); //4
+        editor.apply(); //4
     }
 
 
-    public void save(Context context, HashMap<String,Integer> map) {
+    public void save(Context context, HashMap<String,?> map) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
 
@@ -94,9 +96,15 @@ public class SharedPref {
         editor = settings.edit(); //2
 
 
-        //editor.putString(PREFS_KEY, String.valueOf(map.get("123"))); //3
+        if(map.containsKey(PREFS_USERNAME))
+            editor.putString(PREFS_USERNAME,String.valueOf(map.get(PREFS_USERNAME)));
+        if(map.containsKey(PREFS_PASSWORD))
+            editor.putString(PREFS_PASSWORD,String.valueOf(map.get(PREFS_PASSWORD)));
+        if(map.containsKey(PREFS_USERID))
+            editor.putString(PREFS_USERID,String.valueOf(map.get(PREFS_USERID)));
 
-        editor.commit(); //4
+
+        editor.apply(); //4
     }
 
     public void save(Context context, String Key, boolean boole) {
@@ -111,7 +119,7 @@ public class SharedPref {
 
         //editor.putString(PREFS_KEY, String.valueOf(map.get("123"))); //3
 
-        editor.commit(); //4
+        editor.apply(); //4
     }
 
 

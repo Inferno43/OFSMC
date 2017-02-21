@@ -7,8 +7,9 @@ import android.os.Parcelable;
  * Created by ${USER_NAME} on 2/16/17.
  */
 
-public class Employee  implements Parcelable {
+public class Employee implements Parcelable  {
 
+    private String userId;
     private String employeeId;
     private String employeeName;
     private String employeeDepartment;
@@ -17,8 +18,9 @@ public class Employee  implements Parcelable {
     private String employeePhase;
     private String employeeExtension;
 
-    public Employee(String employeeId, String employeeName, String employeeDepartment,
+    public Employee(String userId, String employeeId, String employeeName, String employeeDepartment,
                     String employeePassword, String employeeEmail, String employeePhase, String employeeExtension) {
+        this.userId = userId;
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeDepartment = employeeDepartment;
@@ -28,7 +30,9 @@ public class Employee  implements Parcelable {
         this.employeeExtension = employeeExtension;
     }
 
+
     protected Employee(Parcel in) {
+        userId = in.readString();
         employeeId = in.readString();
         employeeName = in.readString();
         employeeDepartment = in.readString();
@@ -40,6 +44,7 @@ public class Employee  implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userId);
         dest.writeString(employeeId);
         dest.writeString(employeeName);
         dest.writeString(employeeDepartment);
@@ -120,5 +125,13 @@ public class Employee  implements Parcelable {
 
     public void setEmployeeExtension(String employeeExtension) {
         this.employeeExtension = employeeExtension;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

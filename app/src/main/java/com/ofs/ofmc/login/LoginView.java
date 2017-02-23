@@ -57,7 +57,6 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
         if(sharedPref.getString(getContext(),SharedPref.PREFS_USERNAME) != null){
             username.setText(sharedPref.getString(getContext(),SharedPref.PREFS_USERNAME));
             password.setText(sharedPref.getString(getContext(),SharedPref.PREFS_PASSWORD));
-            Toast.makeText(getActivity(),sharedPref.getString(getContext(),SharedPref.PREFS_USERID),Toast.LENGTH_LONG).show();
         }
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,9 @@ public class Employee implements Parcelable  {
     private String employeePhase;
     private String employeeExtension;
 
+    public Employee() {
+    }
+
     public Employee(String userId, String employeeId, String employeeName, String employeeDepartment,
                     String employeePassword, String employeeEmail, String employeePhase, String employeeExtension) {
         this.userId = userId;

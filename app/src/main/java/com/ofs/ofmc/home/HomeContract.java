@@ -1,5 +1,8 @@
 package com.ofs.ofmc.home;
 
+import android.app.Activity;
+import android.content.Context;
+
 import com.ofs.ofmc.BasePresenter;
 import com.ofs.ofmc.BaseView;
 import com.ofs.ofmc.model.Employee;
@@ -27,7 +30,10 @@ public interface HomeContract {
     interface PresenterProfile extends BasePresenter{
 
         void loadProfile(String id);
-        void editProfile();
+        void editProfile(Employee employee);
+
         void saveProfile(Employee employee);
+        void profileCompleted(boolean isComplete);
+        void setContext(Context context);
     }
 }

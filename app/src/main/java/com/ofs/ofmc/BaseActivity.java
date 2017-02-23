@@ -25,10 +25,6 @@ public class BaseActivity extends AppCompatActivity implements AbstractFragmentC
         firebaseDatabase = FirebaseDatabase.getInstance();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
     @Override
     protected void onResume() {

@@ -15,9 +15,9 @@ public class LoginPresenter implements OnboardingContract.Presenterlogin {
 
 
     @Override
-    public void login(String userName,String password) {
-
-        view.startHome(userName,password);
+    public void login(String userName,String password) throws Exception {
+        if(view.allFieldsValid())
+            view.startHome(userName,password);
     }
 
     @Override

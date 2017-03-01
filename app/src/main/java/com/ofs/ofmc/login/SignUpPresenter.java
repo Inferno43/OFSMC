@@ -15,7 +15,8 @@ public class SignUpPresenter implements OnboardingContract.PresenterSignUp {
 
     @Override
     public void signUp(String userName,String email,String password) throws Exception {
-        viewSignUp.showLogin(userName,email,password);
+        if(viewSignUp.allFieldsValid())
+            viewSignUp.showLogin(userName,email,password);
     }
 
     @Override

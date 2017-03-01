@@ -15,4 +15,8 @@
     <dimen name="textPrimary">22sp</dimen>
     <dimen name="textSecondary">18sp</dimen>
     <dimen name="textNormal">16sp</dimen>
+
+    <dimen name="card_elevation_6dp">6dp</dimen>
+    <dimen name="card_elevation_8dp">8dp</dimen>
+    <dimen name="card_radius">4dp</dimen>
 </resources>

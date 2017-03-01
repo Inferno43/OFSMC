@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ofs.ofmc.model.Employee;
+import com.ofs.ofmc.toolbox.Constants;
 import com.ofs.ofmc.toolbox.SharedPref;
 
 import java.util.HashMap;
@@ -23,12 +24,14 @@ public class ProfilePresenter implements HomeContract.PresenterProfile{
     FirebaseDatabase firebaseDatabase;
     Employee employee;
     Context context;
+    SharedPref sharedPref;
 
 
     public ProfilePresenter(HomeContract.ViewProfile viewProfile,FirebaseDatabase firebaseDatabase) {
         this.viewProfile = viewProfile;
         this.firebaseDatabase = firebaseDatabase;
         this.viewProfile.setPresenter(this);
+        sharedPref = new SharedPref();
     }
 
     @Override
@@ -45,13 +48,18 @@ public class ProfilePresenter implements HomeContract.PresenterProfile{
                    String employeeEmail = (String) dataSnapshot.child("Employees").child(userId).child("employeeEmail").getValue();
                    String employeePhase = (String) dataSnapshot.child("Employees").child(userId).child("employeePhase").getValue();
                    String employeeExtension = (String) dataSnapshot.child("Employees").child(userId).child("employeeExtension").getValue();
-
+                   String employeeImage = Constants.FIREBASE_IMAGE_PATH;
                        viewProfile.showProfile(new Employee(user,employeeId,employeeName,employeeDepartment,"",
-                               employeeEmail,employeePhase,employeeExtension));
+                               employeeEmail,employeePhase,employeeExtension,employeeImage));
                        viewProfile.showMessage("your profile loaded");
 
                }else{
-                   viewProfile.showMessage("your profile could not be loaded");
+                   String userId = sharedPref.getString(context,SharedPref.PREFS_USERID);
+                   String employeeName = sharedPref.getString(context,SharedPref.PREFS_USER);
+                   String employeeEmail = sharedPref.getString(context,SharedPref.PREFS_USERNAME);
+                   viewProfile.showProfile(new Employee(userId,"",employeeName,"","",
+                           employeeEmail,"","",""));
+                   viewProfile.showMessage("your profile is incomplete");
                }
             }
 
@@ -73,7 +81,8 @@ public class ProfilePresenter implements HomeContract.PresenterProfile{
     }
 
     @Override
-    public void saveProfile(final Employee employee) {
+    public void saveProfile(final Employee employee) throws Exception {
+        if(viewProfile.allFieldsValid())
         firebaseDatabase.getReference().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

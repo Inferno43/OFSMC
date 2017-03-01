@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_accounts"
+        android:title="Accounts" />
+    <item
+        android:id="@+id/menu_admin"
+        android:title="Admin" />
+    <item
+        android:id="@+id/menu_business_dev"
+        android:title="Business Development" />
+    <item
+        android:id="@+id/menu_engineering"
+        android:title="Engineering" />
+    <item
+        android:id="@+id/menu_management"
+        android:title="Management" />
+    <item
+        android:id="@+id/menu_qa"
+        android:title="QA/Process" />
+
+</menu>

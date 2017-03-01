@@ -22,9 +22,11 @@ public class SharedPref {
     }
 
     public static final String PREFS_OFMC = "OFMC";
-    public static final String PREFS_USERNAME = "userName";
+    public static final String PREFS_USERNAME = "email";
+    public static final String PREFS_USER = "user";
     public static final String PREFS_PASSWORD = "password";
     public static final String PREFS_USERID= "userId";
+    public static final String PREFS_USER_IMAGE ="userImage";
 
     public static final String PREFS_IS_PROFILE_COMPLETE = "profile";
     public static final String PREFS_AUTOFILL = "autofill";
@@ -102,6 +104,8 @@ public class SharedPref {
             editor.putString(PREFS_PASSWORD,String.valueOf(map.get(PREFS_PASSWORD)));
         if(map.containsKey(PREFS_USERID))
             editor.putString(PREFS_USERID,String.valueOf(map.get(PREFS_USERID)));
+        if(map.containsKey(PREFS_USER))
+            editor.putString(PREFS_USER,String.valueOf(map.get(PREFS_USER)));
 
 
         editor.apply(); //4
@@ -123,11 +127,27 @@ public class SharedPref {
     }
 
 
+    public void save(Context context, String Key, String string) {
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+
+        //settings = PreferenceManager.getDefaultSharedPreferences(context);
+        settings = context.getSharedPreferences(PREFS_OFMC, Context.MODE_PRIVATE); //1
+        editor = settings.edit(); //
+
+        editor.putString(Key, string);
+
+        //editor.putString(PREFS_KEY, String.valueOf(map.get("123"))); //3
+
+        editor.apply(); //4
+    }
+
+
     public void coachmarksShown(Context context, String className,boolean shown) {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_COACHMARKS, Context.MODE_PRIVATE); //1
+        settings = context.getSharedPreferences(PREFS_OFMC, Context.MODE_PRIVATE); //1
         editor = settings.edit(); //2
 
         editor.putBoolean(className, shown);
@@ -139,7 +159,7 @@ public class SharedPref {
         SharedPreferences settings;
         SharedPreferences.Editor editor;
 
-        settings = context.getSharedPreferences(PREFS_COACHMARKS, Context.MODE_PRIVATE); //1
+        settings = context.getSharedPreferences(PREFS_OFMC, Context.MODE_PRIVATE); //1
 
         return settings.getBoolean(className,false);
     }
@@ -191,9 +211,8 @@ public class SharedPref {
         //settings = PreferenceManager.getDefaultSharedPreferences(context);
         settings = context.getSharedPreferences(PREFS_OFMC, Context.MODE_PRIVATE);
         editor = settings.edit();
-
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
     public void removeValue(Context context) {

@@ -25,6 +25,7 @@ import com.ofs.ofmc.BaseFragment;
 import com.ofs.ofmc.R;
 import com.ofs.ofmc.abstracts.Arguments;
 import com.ofs.ofmc.exceptions.EmptyTextException;
+import com.ofs.ofmc.exceptions.InvalidFieldException;
 import com.ofs.ofmc.toolbox.Constants;
 import com.ofs.ofmc.toolbox.Utils;
 
@@ -85,6 +86,7 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
                     presenterSignUp.signUp(userName.getText().toString(), email.getText().toString(),
                             password.getText().toString());
                 } catch (Exception e) {
+                    Snackbar.make(rootView,e.getMessage(),Snackbar.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -109,8 +111,14 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
     }
 
     @Override
-    public boolean allFieldsValid() {
-        return false;
+    public boolean allFieldsValid() throws EmptyTextException,InvalidFieldException {
+        if(userName.getText().toString().isEmpty()  &&  password.getText().toString().isEmpty() && email.getText().toString().isEmpty())
+            throw new EmptyTextException("Fields are empty");
+        if(Utils.validUserName(userName.getText().toString()) && Utils.validateEmail(email.getText().toString())
+                && Utils.validpassword(password.getText().toString()))
+            return true;
+        else
+            throw new InvalidFieldException("Please enter Username and Password correctly");
     }
 
 
@@ -141,6 +149,7 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
                                             Onboarding onboarding = (Onboarding) getActivity();
                                             Bundle args = new Bundle();
                                             args.putString(Constants.EXTRA_EMAIL,email);
+                                            args.putString(Constants.EXTRA_USERNAME,userName);
                                             arguments.setBundle(args);
                                             onboarding.getViewPager().setCurrentItem(0);
 
@@ -156,8 +165,10 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
                             }
                         }
                     });
-        } else
-            Toast.makeText(context, "Invalid email or password", Toast.LENGTH_LONG).show();
+        } else{
+            //Toast.makeText(context, "Invalid email or password", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

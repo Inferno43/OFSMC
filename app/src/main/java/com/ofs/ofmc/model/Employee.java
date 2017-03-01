@@ -10,6 +10,7 @@ import android.os.Parcelable;
 public class Employee implements Parcelable  {
 
     private String userId;
+    private String employeeImage;
     private String employeeId;
     private String employeeName;
     private String employeeDepartment;
@@ -22,7 +23,7 @@ public class Employee implements Parcelable  {
     }
 
     public Employee(String userId, String employeeId, String employeeName, String employeeDepartment,
-                    String employeePassword, String employeeEmail, String employeePhase, String employeeExtension) {
+                    String employeePassword, String employeeEmail, String employeePhase, String employeeExtension,String employeeImage) {
         this.userId = userId;
         this.employeeId = employeeId;
         this.employeeName = employeeName;
@@ -31,6 +32,7 @@ public class Employee implements Parcelable  {
         this.employeeEmail = employeeEmail;
         this.employeePhase = employeePhase;
         this.employeeExtension = employeeExtension;
+        this.employeeImage = employeeImage;
     }
 
 
@@ -43,6 +45,7 @@ public class Employee implements Parcelable  {
         employeeEmail = in.readString();
         employeePhase = in.readString();
         employeeExtension = in.readString();
+        employeeImage = in.readString();
     }
 
     @Override
@@ -55,6 +58,7 @@ public class Employee implements Parcelable  {
         dest.writeString(employeeEmail);
         dest.writeString(employeePhase);
         dest.writeString(employeeExtension);
+        dest.writeString(employeeImage);
     }
 
     @Override
@@ -136,5 +140,13 @@ public class Employee implements Parcelable  {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getEmployeeImage() {
+        return employeeImage;
+    }
+
+    public void setEmployeeImage(String employeeImage) {
+        this.employeeImage = employeeImage;
     }
 }

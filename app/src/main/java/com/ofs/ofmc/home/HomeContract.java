@@ -22,6 +22,8 @@ public interface HomeContract {
 
     interface ViewProfile extends BaseView<PresenterProfile>{
 
+
+        boolean allFieldsValid() throws Exception;
         void showMessage(String message);
         void showProfile(Employee employee);
 
@@ -30,10 +32,34 @@ public interface HomeContract {
     interface PresenterProfile extends BasePresenter{
 
         void loadProfile(String id);
-        void editProfile(Employee employee);
+        void editProfile(Employee employee) throws Exception;
 
-        void saveProfile(Employee employee);
+        void saveProfile(Employee employee) throws Exception;
         void profileCompleted(boolean isComplete);
         void setContext(Context context);
+    }
+
+    interface ViewDashboard extends BaseView<PresenterDashboard>{
+
+    }
+
+    interface PresenterDashboard extends BasePresenter{
+
+    }
+
+    interface ViewHolidays extends BaseView<PresenterHolidays>{
+
+    }
+
+    interface PresenterHolidays extends BasePresenter{
+
+    }
+
+    interface ViewEmployeeSeating extends BaseView<PresenterEmployeeSeating>{
+
+    }
+
+    interface PresenterEmployeeSeating extends BasePresenter{
+
     }
 }

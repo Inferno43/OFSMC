@@ -7,13 +7,26 @@
             android:icon="@drawable/ic_menu_home"
             android:title="Home" />
         <item
+            android:id="@+id/nav_ofs_directory"
+            android:icon="@drawable/ic_people"
+            android:title="OFS Directory" />
+        <item
+            android:id="@+id/nav_ofs_holiday"
+            android:icon="@drawable/ic_face"
+            android:title="OFS Holiday" />
+        <item
+            android:id="@+id/nav_seating"
+            android:icon="@drawable/ic_seat"
+            android:title="Seating"
+            android:visible="false"/>
+        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"
             android:title="Profile" />
 
     </group>
 
-    <item android:title="Options">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/nav_settings"

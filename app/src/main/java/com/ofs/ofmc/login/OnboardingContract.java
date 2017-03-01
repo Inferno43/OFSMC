@@ -13,7 +13,7 @@ public interface OnboardingContract {
 
     interface Viewlogin extends BaseView<Presenterlogin>{
         void startHome(String username,String password);
-        boolean allFieldsValid();
+        boolean allFieldsValid() throws Exception;
     }
 
     interface Presenterlogin extends BasePresenter{
@@ -24,7 +24,7 @@ public interface OnboardingContract {
     interface ViewSignUp extends BaseView<PresenterSignUp>{
 
         void showLogin(String userName,String email,String password);
-        boolean allFieldsValid();
+        boolean allFieldsValid()throws Exception;
 
     }
 

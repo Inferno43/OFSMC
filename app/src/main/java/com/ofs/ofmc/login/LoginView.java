@@ -20,9 +20,12 @@ import com.google.firebase.auth.AuthResult;
 import com.ofs.ofmc.BaseFragment;
 import com.ofs.ofmc.R;
 import com.ofs.ofmc.abstracts.Arguments;
+import com.ofs.ofmc.exceptions.EmptyTextException;
+import com.ofs.ofmc.exceptions.InvalidFieldException;
 import com.ofs.ofmc.home.Home;
 import com.ofs.ofmc.toolbox.Constants;
 import com.ofs.ofmc.toolbox.SharedPref;
+import com.ofs.ofmc.toolbox.Utils;
 
 import java.util.HashMap;
 
@@ -39,6 +42,8 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
     private EditText password;
     private SharedPref sharedPref;
     private HashMap<String,String> map;
+    private Context context;
+    private String user;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,11 +55,12 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView  = inflater.inflate(R.layout.login,container,false);
         sharedPref = new SharedPref();
+        context = getActivity();
         map = new HashMap<>();
         signIn = (Button)rootView.findViewById(R.id.signIn);
         username = (EditText) rootView.findViewById(R.id.userName);
         password = (EditText) rootView.findViewById(R.id.password);
-        if(sharedPref.getString(getContext(),SharedPref.PREFS_USERNAME) != null){
+        if(sharedPref.getString(context,SharedPref.PREFS_USERNAME) != null){
             username.setText(sharedPref.getString(getContext(),SharedPref.PREFS_USERNAME));
             password.setText(sharedPref.getString(getContext(),SharedPref.PREFS_PASSWORD));
         }
@@ -64,7 +70,7 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
                 try {
                     loginPresenter.login(username.getText().toString(),password.getText().toString());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Snackbar.make(rootView,e.getMessage(),Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -86,10 +92,11 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
                 if(sharedPref.getString(getContext(),SharedPref.PREFS_USERNAME) == null){
                     String userId = authResult.getUser().getUid();
                     map.put(SharedPref.PREFS_USERNAME,username);
+                    map.put(SharedPref.PREFS_USER,user);
                     map.put(SharedPref.PREFS_PASSWORD,password);
                     map.put(SharedPref.PREFS_USERID,userId);
 
-                    Toast.makeText(getActivity(),userId+ " " +sharedPref.getString(getContext(),SharedPref.PREFS_USERID),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(),userId+ " " +sharedPref.getString(getContext(),SharedPref.PREFS_USERID),Toast.LENGTH_LONG).show();
                     sharedPref.save(getContext(),map);
                 }
                 startActivity(Home.class,null);
@@ -99,8 +106,14 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
     }
 
     @Override
-    public boolean allFieldsValid() {
-        return false;
+    public boolean allFieldsValid() throws EmptyTextException,InvalidFieldException {
+        if(username.getText().toString().isEmpty()  &&  password.getText().toString().isEmpty())
+            throw new EmptyTextException("Fields are empty");
+        if(Utils.validateEmail(username.getText().toString()) && Utils.validpassword(password.getText().toString()))
+            return true;
+        else
+            throw new InvalidFieldException("Please enter Username and Password correctly");
+
     }
 
 
@@ -114,5 +127,6 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
     @Override
     public void setBundle(Bundle args) {
         username.setText(args.getString(Constants.EXTRA_EMAIL));
+        user = args.getString(Constants.EXTRA_USERNAME);
     }
 }

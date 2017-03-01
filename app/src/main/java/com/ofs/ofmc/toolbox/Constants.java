@@ -19,4 +19,8 @@ public class Constants {
 
     public static String MOTION_X_ARG = "extra.X";
     public static String MOTION_Y_ARG = "extra.Y";
+
+    public static final String FIREBASE_IMAGE_PATH = "images/";
+
+    public static int PICK_IMAGE_REQUEST = 1000;
 }

@@ -13,6 +13,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
+    <string name="action_search">search</string>
+
+    <string name="ofs_directory">OFS Directory</string>
+    <string name="ofs_holiday">OFS Holiday</string>
+    <string name="ofs_profile">Profile</string>
+    <string name="ofs_home">Dashboard</string>
+
 
     <!--Hint-->
     <string name="username">Username</string>
@@ -21,7 +28,7 @@
     <string name="emp_Id">Employee Id</string>
     <string name="department">Department</string>
     <string name="extension">Extension</string>
-    <string name="phase">Phase</string>
+    <string name="phase">Location</string>
 
 
 </resources>

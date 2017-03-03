@@ -2,6 +2,7 @@ package com.ofs.ofmc.home;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -85,11 +87,17 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.View
             holder.empExtension.setText(employees.get(position).getEmployeeExtension());
             String sx = employees.get(position).getEmployeeImage()+employees.get(position).getUserId();
             storageReference.child(employees.get(position).getEmployeeImage()+employees.get(position).getUserId()+".jpg")
-                    .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    .getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Picasso.with(context).load(R.mipmap.ic_launcher);
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Picasso.with(context).load(uri.toString())
                             .placeholder(R.mipmap.ic_launcher)
+                            .error(R.mipmap.ic_launcher)
                             .resize(100,100).into(holder.empImage, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -102,7 +110,6 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.View
 
                         @Override
                         public void onError() {
-
                         }
                     });
                 }

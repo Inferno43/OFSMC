@@ -8,14 +8,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.ofs.ofmc.BaseActivity;
 import com.ofs.ofmc.R;
-import com.ofs.ofmc.abstracts.Arguments;
-import com.ofs.ofmc.toolbox.Constants;
+import com.ofs.ofmc.contracts.Arguments;
 
 public class Onboarding extends BaseActivity implements Arguments{
 

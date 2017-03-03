@@ -2,7 +2,6 @@ package com.ofs.ofmc.login;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,10 +22,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ofs.ofmc.BaseFragment;
 import com.ofs.ofmc.R;
-import com.ofs.ofmc.abstracts.Arguments;
+import com.ofs.ofmc.contracts.Arguments;
 import com.ofs.ofmc.exceptions.EmptyTextException;
 import com.ofs.ofmc.exceptions.InvalidFieldException;
 import com.ofs.ofmc.toolbox.Constants;
+import com.ofs.ofmc.toolbox.MetaballView;
 import com.ofs.ofmc.toolbox.Utils;
 
 /**
@@ -41,12 +41,8 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
     private EditText userName;
     private EditText password;
     private EditText email;
-    private EditText employeeId;
-    private EditText department;
-    private EditText phase;
-    private EditText extension;
     private Button register;
-
+    private MetaballView progressBar;
     Arguments arguments;
 
     @Override
@@ -74,18 +70,17 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
         userName = (EditText) rootView.findViewById(R.id.userName);
         password = (EditText) rootView.findViewById(R.id.password);
         email = (EditText) rootView.findViewById(R.id.email);
-//        employeeId = (EditText)rootView.findViewById(R.id.emp_id);
-//        department = (EditText)rootView.findViewById(R.id.department);
-//        phase = (EditText)rootView.findViewById(R.id.phase);
-//        extension = (EditText)rootView.findViewById(R.id.extension);
         register = (Button) rootView.findViewById(R.id.register);
+        progressBar = (MetaballView) rootView.findViewById(R.id.metaball);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showProgress(true);
                 try {
                     presenterSignUp.signUp(userName.getText().toString(), email.getText().toString(),
                             password.getText().toString());
                 } catch (Exception e) {
+                    showProgress(false);
                     Snackbar.make(rootView,e.getMessage(),Snackbar.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
@@ -145,6 +140,7 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
                                     public void onSuccess(AuthResult authResult) {
                                         if (authResult.getUser() != null) {
 
+                                            showProgress(false);
                                             Snackbar.make(getView(), "Hello " + userName, Snackbar.LENGTH_LONG).show();
                                             Onboarding onboarding = (Onboarding) getActivity();
                                             Bundle args = new Bundle();
@@ -159,6 +155,7 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
                                         .addOnFailureListener(getActivity(), new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                showProgress(false);
                                                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                             }
                                         });
@@ -169,6 +166,16 @@ public class SignUpView extends BaseFragment implements OnboardingContract.ViewS
             //Toast.makeText(context, "Invalid email or password", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+    @Override
+    public void showProgress(boolean show) {
+        if(show){
+            progressBar.setVisibility(View.VISIBLE);
+        }else if(!show){
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

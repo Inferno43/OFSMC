@@ -19,7 +19,7 @@ public class Utils {
 
     private Utils() {
     }
-    private static Pattern validUser = Pattern.compile("^[A-Za-z_ ]\\w{5,29}$");
+    private static Pattern validUser = Pattern.compile("^[A-Za-z_\\s]\\w{5,29}$");
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 

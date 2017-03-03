@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,11 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.ofs.ofmc.BaseFragment;
 import com.ofs.ofmc.R;
-import com.ofs.ofmc.abstracts.Arguments;
+import com.ofs.ofmc.contracts.Arguments;
 import com.ofs.ofmc.exceptions.EmptyTextException;
 import com.ofs.ofmc.exceptions.InvalidFieldException;
 import com.ofs.ofmc.home.Home;
 import com.ofs.ofmc.toolbox.Constants;
+import com.ofs.ofmc.toolbox.MetaballView;
+import com.ofs.ofmc.toolbox.Progressbar;
 import com.ofs.ofmc.toolbox.SharedPref;
 import com.ofs.ofmc.toolbox.Utils;
 
@@ -44,6 +44,7 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
     private HashMap<String,String> map;
     private Context context;
     private String user;
+    private MetaballView progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
         context = getActivity();
         map = new HashMap<>();
         signIn = (Button)rootView.findViewById(R.id.signIn);
+        progressBar = (MetaballView) rootView.findViewById(R.id.metaball);
         username = (EditText) rootView.findViewById(R.id.userName);
         password = (EditText) rootView.findViewById(R.id.password);
         if(sharedPref.getString(context,SharedPref.PREFS_USERNAME) != null){
@@ -67,9 +69,11 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showProgress(true);
                 try {
                     loginPresenter.login(username.getText().toString(),password.getText().toString());
                 } catch (Exception e) {
+                    showProgress(false);
                     Snackbar.make(rootView,e.getMessage(),Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -99,6 +103,7 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
                     //Toast.makeText(getActivity(),userId+ " " +sharedPref.getString(getContext(),SharedPref.PREFS_USERID),Toast.LENGTH_LONG).show();
                     sharedPref.save(getContext(),map);
                 }
+                showProgress(false);
                 startActivity(Home.class,null);
             }
         });
@@ -116,6 +121,15 @@ public class LoginView extends BaseFragment implements OnboardingContract.Viewlo
 
     }
 
+    @Override
+    public void showProgress(boolean show) {
+        if(show){
+            progressBar.setVisibility(View.VISIBLE);
+        }else if(!show){
+            progressBar.setVisibility(View.GONE);
+        }else
+            progressBar.setVisibility(View.GONE);
+    }
 
 
     @Override

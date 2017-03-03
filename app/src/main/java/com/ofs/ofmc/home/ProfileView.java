@@ -232,7 +232,12 @@ public class ProfileView extends BaseFragment implements HomeContract.ViewProfil
         Extension.setText(employee.getEmployeeExtension());
         String sx = employee.getEmployeeImage()+employee.getUserId();
         storageReference.child(employee.getEmployeeImage()+employee.getUserId()+".jpg")
-                .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                .getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Picasso.with(context).load(R.mipmap.ic_launcher);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.with(context).load(uri.toString())
@@ -250,6 +255,7 @@ public class ProfileView extends BaseFragment implements HomeContract.ViewProfil
                     @Override
                     public void onError() {
 
+                        Picasso.with(context).load(R.mipmap.ic_launcher);
                     }
                 });
 

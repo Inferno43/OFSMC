@@ -1,4 +1,4 @@
-package com.ofs.ofmc.abstracts;
+package com.ofs.ofmc.contracts;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

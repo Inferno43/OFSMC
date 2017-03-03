@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -67,27 +68,6 @@ public class Home extends BaseActivity implements NavigationView.OnNavigationIte
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        profileView = new ProfileView();
-        profileView.setArguments(fragmentArgs);
-
-        directoryView = new DirectoryView();
-        directoryView.setArguments(fragmentArgs);
-
-        holidaysView = new HolidaysView();
-
-        dashboardView = new DashboardView();
-
-        employeeSeatingView = new EmployeeSeatingView();
-
-
-
-        profilePresenter = new ProfilePresenter(profileView,firebaseDatabase);
-        directoryPresenter = new DirectoryPresenter(directoryView);
-        holidaysPresenter = new HolidaysPresenter(holidaysView);
-        dashboardPresenter = new DashboardPresenter(dashboardView);
-        employeeSeatingPresenter = new EmployeeSeatingPresenter(employeeSeatingView);
-
-
         if(firebaseDatabase.getReference().child("Employees").child(sharedPref.getString(context,SharedPref.PREFS_USERID)) == null
                 && !sharedPref.getBoolean(context,SharedPref.PREFS_IS_PROFILE_COMPLETE) )
                 {
@@ -109,22 +89,30 @@ public class Home extends BaseActivity implements NavigationView.OnNavigationIte
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_home:
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 setFragmentDashboard(false);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_ofs_directory:
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 setFragmentHome(false);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_ofs_holiday:
+
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 setFragmentHolidays(false);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_profile:
+
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 setFragmentProfile(false,null);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_seating:
+
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 setFragmentSeating(false);
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
@@ -156,20 +144,32 @@ public class Home extends BaseActivity implements NavigationView.OnNavigationIte
     }
 
     public void setFragmentProfile(boolean addToBackStack,String userId){
+        profileView = new ProfileView();
         fragmentArgs.putString(Constants.EXTRA_USERID,userId);
+        profileView.setArguments(fragmentArgs);
+        profilePresenter = new ProfilePresenter(profileView,firebaseDatabase);
         replaceFragment(getSupportFragmentManager(),profileView,addToBackStack,fragmentArgs);
     }
 
     public void setFragmentHome(boolean addToBackStack){
+        directoryView = new DirectoryView();
+        directoryView.setArguments(fragmentArgs);
+        directoryPresenter = new DirectoryPresenter(directoryView);
         replaceFragment(getSupportFragmentManager(),directoryView,addToBackStack,fragmentArgs);
     }
     public void setFragmentHolidays(boolean addToBackStack){
+        holidaysView = new HolidaysView();
+        holidaysPresenter = new HolidaysPresenter(holidaysView);
         replaceFragment(getSupportFragmentManager(),holidaysView,addToBackStack,fragmentArgs);
     }
     public void setFragmentDashboard(boolean addToBackStack){
+        dashboardView = new DashboardView();
+        dashboardPresenter = new DashboardPresenter(dashboardView);
         replaceFragment(getSupportFragmentManager(),dashboardView,addToBackStack,fragmentArgs);
     }
     public void setFragmentSeating(boolean addToBackStack){
+        employeeSeatingView = new EmployeeSeatingView();
+        employeeSeatingPresenter = new EmployeeSeatingPresenter(employeeSeatingView);
         replaceFragment(getSupportFragmentManager(),employeeSeatingView,addToBackStack,fragmentArgs);
     }
 
@@ -198,7 +198,7 @@ public class Home extends BaseActivity implements NavigationView.OnNavigationIte
         if(getSupportFragmentManager().getBackStackEntryCount()==0)
             new CustomDialog().show(getSupportFragmentManager(),null);
         else
-            getSupportFragmentManager().popBackStackImmediate();
+            getSupportFragmentManager().popBackStack();
 
 
     }

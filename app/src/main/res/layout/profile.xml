@@ -1,185 +1,196 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:background="@color/backgrounColor"
     android:layout_height="match_parent">
-    <FrameLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimary"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/contentPanel"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
-        <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary"/>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            app:cardElevation="@dimen/card_elevation_6dp"
-            app:cardCornerRadius="@dimen/card_radius"
-            app:cardPreventCornerOverlap="true"
-            android:padding="5dp">
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/contentPanel"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="48dp"
-
-                tools:context="com.ofs.ofmc.login.Onboarding">
-                <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                app:cardElevation="@dimen/card_elevation_6dp"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardPreventCornerOverlap="true"
+                android:padding="5dp">
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:hint="@string/username"
-                        android:id="@+id/userName"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="48dp"
+
+                    tools:context="com.ofs.ofmc.login.Onboarding">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:hint="@string/username"
+                            android:id="@+id/userName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textNoSuggestions"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/email"
+                            android:hint="@string/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress|textNoSuggestions" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/emp_id"
+                            android:hint="@string/emp_Id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number|textNoSuggestions" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textNoSuggestions"/>
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_toStartOf="@+id/departmentSelector">
+                        <EditText
+                            android:id="@+id/department"
+                            android:hint="@string/department"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:inputType="textNoSuggestions"/>
+                    </android.support.design.widget.TextInputLayout>
+                        <ImageView
+                            android:id="@+id/departmentSelector"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:maxHeight="72dp"
+                            android:maxWidth="72dp"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/ic_arrow_down"
+                            android:layout_margin="@dimen/margin"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/email"
-                        android:hint="@string/email"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress|textNoSuggestions" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_toStartOf="@+id/locationSelector">
+                        <EditText
+                            android:id="@+id/phase"
+                            android:hint="@string/phase"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:inputType="textNoSuggestions"/>
+                    </android.support.design.widget.TextInputLayout>
+                        <ImageView
+                            android:id="@+id/locationSelector"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:maxHeight="72dp"
+                            android:maxWidth="72dp"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/ic_arrow_down"
+                            android:layout_margin="@dimen/margin"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/emp_id"
-                        android:hint="@string/emp_Id"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number|textNoSuggestions" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/extension"
+                            android:hint="@string/extension"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number|textNoSuggestions"/>
+                    </android.support.design.widget.TextInputLayout>
 
+                    <Button
+                        android:id="@+id/register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/submit"
+                        android:background="@drawable/button_bg"
+                        style="@style/Widget.AppCompat.Button.Borderless"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/imagePanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/card_elevation_8dp"
+                app:cardCornerRadius="@dimen/card_radius"
+                android:layout_centerHorizontal="true"
+                android:padding="2dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/departmentSelector">
-                    <EditText
-                        android:id="@+id/department"
-                        android:hint="@string/department"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:inputType="textNoSuggestions"/>
-                </android.support.design.widget.TextInputLayout>
+                    android:layout_height="match_parent">
                     <ImageView
-                        android:id="@+id/departmentSelector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:maxHeight="72dp"
-                        android:maxWidth="72dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:focusableInTouchMode="true"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/ic_arrow_down"
-                        android:layout_margin="@dimen/margin"
-                        android:layout_alignParentEnd="true"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/locationSelector">
-                    <EditText
-                        android:id="@+id/phase"
-                        android:hint="@string/phase"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:inputType="textNoSuggestions"/>
-                </android.support.design.widget.TextInputLayout>
+                        android:id="@+id/emp_Image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"/>
                     <ImageView
-                        android:id="@+id/locationSelector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:maxHeight="72dp"
-                        android:maxWidth="72dp"
-                        android:focusable="true"
-                        android:clickable="true"
-                        android:focusableInTouchMode="true"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/ic_arrow_down"
-                        android:layout_margin="@dimen/margin"
-                        android:layout_alignParentEnd="true"/>
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/ic_photo"
+                        android:layout_alignBottom="@+id/emp_Image"
+                        android:layout_alignEnd="@+id/emp_Image"/>
                 </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/extension"
-                        android:hint="@string/extension"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number|textNoSuggestions"/>
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/register"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="@string/submit"
-                    android:background="@drawable/button_bg"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:id="@+id/imagePanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardElevation="@dimen/card_elevation_8dp"
-            app:cardCornerRadius="@dimen/card_radius"
-            android:layout_centerHorizontal="true"
-            android:padding="2dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/emp_Image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"/>
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/ic_photo"
-                    android:layout_alignBottom="@+id/emp_Image"
-                    android:layout_alignEnd="@+id/emp_Image"/>
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
-
-    </FrameLayout>
+        </FrameLayout>
 
 
 
-</ScrollView>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
+

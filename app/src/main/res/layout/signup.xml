@@ -12,6 +12,9 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/cardview_default_elevation">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -72,5 +75,12 @@
                 android:background="@drawable/button_bg"
                 style="@style/Widget.AppCompat.Button.Borderless"/>
         </LinearLayout>
+            <com.ofs.ofmc.toolbox.MetaballView
+                android:id="@+id/metaball"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </ScrollView>

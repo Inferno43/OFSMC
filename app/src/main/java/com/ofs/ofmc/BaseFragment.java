@@ -18,8 +18,8 @@ import android.view.ViewGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.ofs.ofmc.abstracts.AbstractActivityCallback;
-import com.ofs.ofmc.abstracts.AbstractFragmentCallback;
+import com.ofs.ofmc.contracts.AbstractActivityCallback;
+import com.ofs.ofmc.contracts.AbstractFragmentCallback;
 import com.ofs.ofmc.toolbox.Constants;
 
 /**
